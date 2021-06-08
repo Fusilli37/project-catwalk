@@ -10,7 +10,4 @@ module.exports = {
     './node_modules/eslint-config-hackreactor/index.js',
     'plugin:prettier/recommended',
   ],
-  "parserOptions": {
-    "ecmaVersion": 2017
-},
 };
