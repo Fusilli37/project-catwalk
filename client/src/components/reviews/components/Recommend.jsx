@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
-import { MetaContext } from '../../../store.jsx';
-import '../styles/reviews.css';
+import React, { useContext } from "react";
+import { MetaContext } from "../../../store.jsx";
+import "../styles/reviews.css";
 
 let results = {};
 
@@ -15,7 +15,7 @@ const Recommend = () => {
     percentageRecommended = positive;
   }
 
-  if (typeof percentageRecommended !== 'number') {
+  if (typeof percentageRecommended !== "number") {
     return (
       <div>
         <div>There are no reviews for this product</div>

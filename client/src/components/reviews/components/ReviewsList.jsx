@@ -25,7 +25,7 @@ const ReviewsList = () => {
   const [count, setCount] = useState(2);
 
   const [allReviews, setAllReviews] = useState([]);
-  const [sortedArray, setSortedArray] = useState(review);
+  const [sortedArray, setSortedArray] = useState([]);
 
   const handleClick = () => {
     setList(true);
@@ -36,10 +36,6 @@ const ReviewsList = () => {
   };
 
   const totalReviews = review.length;
-
-  useEffect(() => {
-    setAllReviews(review);
-  }, []);
 
   let reviews = review.map(
     ({
@@ -104,24 +100,25 @@ const ReviewsList = () => {
       }
       return 0;
     });
-    setSortedArray(sorted);
   };
 
   if (list === true) {
     return (
       <div>
         <div>
-          <h3>{totalReviews}</h3>
-          <p>reviews, sorted by </p>
-          <select
-            defaultValue="Relevant"
-            onChange={(e) => sortArray(e.target.value)}
-            className={select}
-          >
-            <option value="Helpful">Helpful</option>
-            <option value="Newest">Newest</option>
-            <option value="Relevant">Relevant</option>
-          </select>
+          <div style={{ display: "flex" }}>
+            <h3>{totalReviews}</h3>
+            <p> reviews, sorted by </p>
+            <select
+              defaultValue="Relevant"
+              onChange={(e) => sortArray(e.target.value)}
+              className={select}
+            >
+              <option value="Helpful">Helpful</option>
+              <option value="Newest">Newest</option>
+              <option value="Relevant">Relevant</option>
+            </select>
+          </div>
         </div>
         {list ? <div>{reviews.slice(0, count)} </div> : null}
         <div>

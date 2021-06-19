@@ -14,7 +14,6 @@ const AveRatingDisp = (props) => {
   const meta = useContext(MetaContext);
   const ratings = meta.ratings;
   const [ave, setAve] = useState(0);
-
   const Ave = (props) => {
     const ratingsArr = [];
     let totalRatings = 0;
@@ -40,9 +39,7 @@ const AveRatingDisp = (props) => {
       <h3 className="ratingsHeadline">RATINGS & REVIEWS</h3>
       <div className={topRow}>
         <div className="disp">
-          {/* <div> */}
           <Ave className={aveRow} />
-          {/* </div> */}
           <StarRating rating={ave} className={starRow} />
         </div>
       </div>
