@@ -26,8 +26,6 @@ const ReviewsList = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [list, setList] = useState(true);
   const [count, setCount] = useState(2);
-
-  const [allReviews, setAllReviews] = useState([]);
   const [sortedArray, setSortedArray] = useState();
 
   const handleClick = () => {
@@ -39,7 +37,6 @@ const ReviewsList = () => {
   };
 
   const totalReviews = review.length;
-  console.log("review: ", review);
 
   useEffect(() => {
     const wait = async () => {
@@ -57,7 +54,6 @@ const ReviewsList = () => {
     };
 
     const sortProperty = types[type];
-
     const sorted = [...review].sort((a, b) => {
       if (a[sortProperty] > b[sortProperty]) {
         return -1;

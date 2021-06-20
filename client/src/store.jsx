@@ -13,7 +13,7 @@ export const CartContext = React.createContext();
 export const InteractionsContext = React.createContext();
 
 export const Store = () => {
-  const [id, setId] = useState("11002" || window.location.pathname);
+  const [id, setId] = useState("11001" || window.location.pathname);
   const [product, setProduct] = useState({});
   const [related, setRelated] = useState([]);
   const [styles, setStyles] = useState([]);
@@ -77,7 +77,7 @@ export const Store = () => {
 
   const getReviews = async () => {
     const response = await axios
-      .get(`/reviews/?product_id=${id}`, options)
+      .get(`/reviews/?product_id=${id}&count=100`, options)
       .then((res) => {
         // console.log("Styles Data", res);
         setReviews(res.data.results);
