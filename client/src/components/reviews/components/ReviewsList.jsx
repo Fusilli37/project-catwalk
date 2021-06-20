@@ -9,6 +9,8 @@ import tileStyles from "../styles/ReviewTile.module.css";
 import dividers from "../styles/reviews.css";
 import buttons from "../../qa/styles/QuestionsList.module.css";
 import meta from "../../qa/styles/MetaData.module.css";
+import CallMoreReviews from "../api/CallMoreReviews";
+import SortedReviews from "./SortedReviews";
 
 const { buttonWrapperStyles } = styles;
 const { select, titleRow, userName, ratingStar, helpStyle } = tileStyles;
@@ -19,13 +21,14 @@ const { metaData, link, seeMoreAnswers } = meta;
 const ReviewsList = () => {
   const product = useContext(ProductContext);
   const review = useContext(ReviewsContext);
+  const reviews = review;
 
   const [isOpen, setIsOpen] = useState(false);
   const [list, setList] = useState(true);
   const [count, setCount] = useState(2);
 
   const [allReviews, setAllReviews] = useState([]);
-  const [sortedArray, setSortedArray] = useState([]);
+  const [sortedArray, setSortedArray] = useState();
 
   const handleClick = () => {
     setList(true);
@@ -36,52 +39,15 @@ const ReviewsList = () => {
   };
 
   const totalReviews = review.length;
+  console.log("review: ", review);
 
-  let reviews = review.map(
-    ({
-      review_id,
-      rating,
-      summary,
-      response,
-      body,
-      date,
-      reviewer_name,
-      helpfulness,
-    }) => {
-      return (
-        <div key={review_id}>
-          <hr className={solid} />
-          <div className={titleRow}>
-            <StarRating rating={rating} className={ratingStar} />
-            <div key={review_id} className={`username ${metaData}`}>
-              <div style={{ color: "grey" }}>
-                {reviewer_name} {new Date(date).toDateString()}
-              </div>
-            </div>
-          </div>
-          <span>{summary}</span>
-          <p style={{ color: "grey" }} key={review_id}>
-            {body}
-          </p>
-          <div>
-            <div className={helpStyle}>
-              Helpful?{" "}
-              <span>
-                <a style={{ color: "grey" }} href="">
-                  Yes
-                </a>{" "}
-                ({helpfulness}) |{" "}
-                <a className="link" style={{ color: "grey" }} href="">
-                  Report
-                </a>
-              </span>
-            </div>
-          </div>
-          <hr className={solid} />
-        </div>
-      );
-    }
-  );
+  useEffect(() => {
+    const wait = async () => {
+      const val = await review;
+      setSortedArray(val);
+    };
+    wait();
+  }, [review]);
 
   const sortArray = (type) => {
     const types = {
@@ -91,6 +57,7 @@ const ReviewsList = () => {
     };
 
     const sortProperty = types[type];
+
     const sorted = [...review].sort((a, b) => {
       if (a[sortProperty] > b[sortProperty]) {
         return -1;
@@ -100,6 +67,7 @@ const ReviewsList = () => {
       }
       return 0;
     });
+    setSortedArray(sorted);
   };
 
   if (list === true) {
@@ -114,13 +82,16 @@ const ReviewsList = () => {
               onChange={(e) => sortArray(e.target.value)}
               className={select}
             >
-              <option value="Helpful">Helpful</option>
+              <option value="Helpfull">Helpful</option>
               <option value="Newest">Newest</option>
               <option value="Relevant">Relevant</option>
             </select>
           </div>
         </div>
-        {list ? <div>{reviews.slice(0, count)} </div> : null}
+        {sortedArray && (
+          <SortedReviews count={count} sortedArray={sortedArray} />
+        )}
+        {/* {list ? <div>{reviews.slice(0, count)} </div> : null} */}
         <div>
           {reviews.length > count ? (
             <button
