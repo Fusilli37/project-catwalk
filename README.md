@@ -108,11 +108,17 @@ Per the business requirements this component includes 4 distinct sub components:
 
 ### Intro
 
-Fill out here
+Customers have the ability to write a personalized review, give an overall rating or rate 
+specific attributes of a product.
 
 ### Ratings & Reviews Breakdown
 
-Fill out here
+- Customer Reviews List View:
+  - Products that have been rated by customers will display a list of the top two reviews sorted by the chosen parameter in the accompanied dropdown menu
+- Average Ratings:
+  - A Product's rateable characteristics will be displayed as an average value on the sliding scale
+- Add a Review:
+  - Customers have the ability to add a review for admin review
 
 ![Ratings and Reviews](client/src/assets/Ratings-And-Reviews.png 'ratings and reviews component')
 
