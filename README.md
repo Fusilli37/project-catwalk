@@ -68,11 +68,11 @@ Fill out here
 
 ### Intro
 
-Fill out here
+Based on the current product being viewed, this component will suggest related items that share similar characteristics to help the user with more options.
 
 ### Related Products Breakdown
 
-Fill out here
+The information needed to gather these relations created a set of many sub-queries to return the proper results. JSONB aggrate functions were utilized using Postgres to return the data in an optimal and in a format the met client expectations. To further increase efficiency, b-tree index tables were created to facilitate related product lookup. This led to a 10x fold increase in response time.
 
 ![Related Products](client/src/assets/Related-Products.png 'related products component')
 
